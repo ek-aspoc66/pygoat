@@ -43,3 +43,8 @@ jobs:
       # define the workflow process here
       - name: Checkout repo
         uses: actions/checkout@master
+        
+      # Initialise codeql tooling for the scan
+      - name: Init CodeQL
+        uses: github/codeql-action/init@v2
+        
