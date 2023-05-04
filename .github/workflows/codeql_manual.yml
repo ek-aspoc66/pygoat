@@ -49,4 +49,8 @@ jobs:
         uses: github/codeql-action/init@v2
         with:
           languages: ${{ matrix.language }}
+          
+      # Kick off a scan
+      - name: Exec CodeQL Analysis
+        uses: github/codeql-action/analyse@v2
         
