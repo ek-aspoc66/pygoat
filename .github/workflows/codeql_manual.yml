@@ -42,4 +42,4 @@ jobs:
     steps:
       # define the workflow process here
       - name: Checkout repo
-      uses: actions/checkout@master
+        uses: actions/checkout@master
