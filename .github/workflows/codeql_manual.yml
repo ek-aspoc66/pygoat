@@ -52,5 +52,5 @@ jobs:
           
       # Kick off a scan
       - name: Exec CodeQL Analysis
-        uses: github/codeql-action/analyse@v2
+        uses: github/codeql-action/analyze@v2
         
