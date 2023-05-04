@@ -1,0 +1,45 @@
+# hand crafted codeql config file
+
+# This is the name of the workflow in your github actions tab
+name: "Manual CodeQL POC"
+
+# Here we specify the scanning trigger
+# basically kick off a scan on a push or PR to master
+on:
+  push:
+    branches: ["master"]
+    paths-ignore:
+    # ignore changes to markdown files. These should not trigger a scan.
+      - '**/*.md'
+  pull_request:
+    branches: ["master"]
+    # ignore changes to markdown files. These should not trigger a scan.
+    paths-ignore:
+      - '**./*.md'
+    
+# Here we specify the workflow of the codeql scanning process
+# similar to a pipline config
+jobs:
+
+  # global config section
+  # here we specify the OS that the scanner needs to run on
+  analyze_job:
+    name: Analyse
+    runs-on: ["ubuntu-latest"]
+    permissions: 
+      pull-requests: read
+      actions: read
+      contents: read
+      security-events: read
+    
+  
+    strategy:
+      # GitHub will cancel all in-progress and queued jobs in the matrix if any job in the matrix fails
+      fail-fast: false
+      matrix:
+        language: ["python"]
+  
+    steps:
+      # define the workflow process here
+      - name: Checkout repo
+      uses: actions/checkout@master
