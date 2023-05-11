@@ -44,6 +44,11 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@master
         
+      - name: Cache Dependecies 
+        uses: actions/setup-python@v4
+        with:
+          cache: 'pip'
+        
       # Initialise codeql tooling for the scan
       - name: Init CodeQL
         uses: github/codeql-action/init@v2
