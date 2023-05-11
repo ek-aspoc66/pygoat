@@ -47,6 +47,7 @@ jobs:
       - name: Cache Dependecies 
         uses: actions/setup-python@v4
         with:
+          python-version: '3.9'
           cache: 'pip'
         
       # Initialise codeql tooling for the scan
