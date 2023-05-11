@@ -13,19 +13,11 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-    - uses: actions/checkout@v3
+      - uses: actions/checkout@v3
+ 
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+          cache: 'pip'
+      - run: pip install -r requirements.txt
     
-    - name: Cache Primes
-      id: cache-primes
-      uses: actions/cache@v3
-      with:
-        path: prime-numbers
-        key: ${{ runner.os }}-primes
-        
-    - name: Generate Prime Numbers
-      if: steps.cache-primes.outputs.cache-hit != 'true'
-      run: /generate-primes.sh -d prime-numbers
-      
-    - name: Use Prime Numbers
-      run: /primes.sh -d prime-numbers
-      
