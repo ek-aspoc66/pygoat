@@ -62,3 +62,44 @@ jobs:
         with:
           category: "/language:${{matrix.language}}"
         
+  # global config section
+  # here we specify the OS that the scanner needs to run on
+  analyze2_job:
+    name: Analyse2
+    runs-on: ["ubuntu-latest"]
+    permissions: 
+      pull-requests: read
+      actions: read
+      contents: read
+      security-events: write
+    
+  
+    strategy:
+      # GitHub will cancel all in-progress and queued jobs in the matrix if any job in the matrix fails
+      fail-fast: false
+      matrix:
+        language: ["python"]
+  
+    steps:
+      # define the workflow process here
+      - name: Checkout repo
+        uses: actions/checkout@master
+        
+      - name: Cachee Dependecies 
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+          cache: 'pip'
+        
+      # Initialise codeql tooling for the scan
+      - name: Init CodeQL
+        uses: github/codeql-action/init@v2
+        with:
+          languages: ${{ matrix.language }}
+          
+      # Kick off a scan
+      - name: Exec CodeQL Analysis
+        uses: github/codeql-action/analyze@v2
+        with:
+          category: "/language:${{matrix.language}}"
+        
