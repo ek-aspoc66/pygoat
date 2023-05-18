@@ -16,7 +16,7 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v3
  
-      - name: Pythion setup with cache
+      - name: Pythion setup with cache.
         uses: actions/setup-python@v4
         with:
           python-version: '3.9'
